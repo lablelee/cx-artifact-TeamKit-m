@@ -155,13 +155,17 @@ mv "$ROOT/config/default-client.new" "$ROOT/config/default-client"
 # Remove the legacy shim if this is an upgrade. It shadowed the user's normal Claude command.
 rm -f "$ROOT/bin/claude"
 ZSHRC="$HOME/.zshrc"
-if [ -f "$ZSHRC" ]; then
+# Strip the legacy "TeamKit Claude" PATH block only when it is actually there.
+# Write through the existing file rather than mv-ing a replacement over it so
+# an untouched .zshrc is never rewritten and a symlinked one keeps its target.
+if [ -f "$ZSHRC" ] && grep -Fqx '# >>> TeamKit Claude >>>' "$ZSHRC"; then
   awk '
     /^# >>> TeamKit Claude >>>$/ { skip=1; next }
     /^# <<< TeamKit Claude <<<$/{ skip=0; next }
     !skip { print }
   ' "$ZSHRC" > "$ZSHRC.teamkit-next"
-  mv "$ZSHRC.teamkit-next" "$ZSHRC"
+  cat "$ZSHRC.teamkit-next" > "$ZSHRC"
+  rm -f "$ZSHRC.teamkit-next"
 fi
 # Only put TeamKit's bin/ on PATH once it's confirmed clean of a claude shim --
 # never let a stray/partial install shadow the user's real claude command.
