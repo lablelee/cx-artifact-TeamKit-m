@@ -1,13 +1,13 @@
 {
   "schema_version": "teamkit.release-catalog/v1",
   "channel": "stable",
-  "teamkit_version": "0.1.74",
+  "teamkit_version": "0.1.75",
   "platforms": {
     "windows-amd64": {
       "core": {
-        "path": "core/teamkit-0.1.74-windows-amd64.zip",
-        "size": 30898652,
-        "sha256": "89b5e1e94ac8126f11a3d16bd855497ae6be107b238d0b55d4aa2a67e3ef7b70"
+        "path": "core/teamkit-0.1.75-windows-amd64.zip",
+        "size": 30898661,
+        "sha256": "f9a0061ca25714967ee6784229f00d5d3fba53b9fb1a0cec8f053d39a751b32b"
       },
       "kb": {
         "path": "packs/ci360-kb-go-0.1.5-citations-windows-amd64.zip",
@@ -17,9 +17,9 @@
     },
     "darwin-amd64": {
       "core": {
-        "path": "core/teamkit-0.1.74-darwin-amd64.zip",
-        "size": 27399650,
-        "sha256": "c47660578266e52f8f7faa3ca72525b7a88106b116666e10d0e7655420978e02"
+        "path": "core/teamkit-0.1.75-darwin-amd64.zip",
+        "size": 27399659,
+        "sha256": "e524ca017807c241ec4b94cd730d9feca0df659659686d997f1770fd54e79b0f"
       },
       "kb": {
         "path": "packs/ci360-kb-go-0.1.5-citations-darwin-amd64.zip",
@@ -28,15 +28,15 @@
       },
       "installer": {
         "path": "installer/install_macos.sh",
-        "size": 11253,
-        "sha256": "9ddef7bda05e741b1762789fc2231dd9c66796cdf827127886a850acb19fba32"
+        "size": 12561,
+        "sha256": "e75490275545e4c5eceb15cf6088ce030303cb9a4e1fdf942dffd3677db0b1bd"
       }
     },
     "darwin-arm64": {
       "core": {
-        "path": "core/teamkit-0.1.74-darwin-arm64.zip",
-        "size": 25664435,
-        "sha256": "150c04d3e9467f0b5374fd2d8b1a0c687686774903b1c179a795d51bdf19d0c5"
+        "path": "core/teamkit-0.1.75-darwin-arm64.zip",
+        "size": 25664427,
+        "sha256": "ae56b0dbc13a0c2d2802cc964fd2ca58e3da0ebb4dc25a35f00b90293601987e"
       },
       "kb": {
         "path": "packs/ci360-kb-go-0.1.5-citations-darwin-arm64.zip",
@@ -45,8 +45,8 @@
       },
       "installer": {
         "path": "installer/install_macos.sh",
-        "size": 11253,
-        "sha256": "9ddef7bda05e741b1762789fc2231dd9c66796cdf827127886a850acb19fba32"
+        "size": 12561,
+        "sha256": "e75490275545e4c5eceb15cf6088ce030303cb9a4e1fdf942dffd3677db0b1bd"
       }
     }
   }

@@ -49,6 +49,17 @@ gateway_value() {
 GATEWAY_URL=$(gateway_value AZURE_APIM_GATEWAY_URL)
 APIM_KEY=$(gateway_value ANTHROPIC_API_KEY_APIM)
 USER_KEY=$(gateway_value CXAI_GATEWAY_USER_KEY)
+# Saved settings are reused, but a person at the terminal is asked first: an
+# installer that could only ever reuse a mistyped key would leave the user
+# believing setup succeeded with no way back short of editing a hidden file.
+# Non-interactive runs keep the saved values unchanged.
+if [ -n "$GATEWAY_URL" ] && [ -n "$APIM_KEY" ] && [ -t 0 ]; then
+  printf 'TeamKit setup: saved gateway settings found in %s\nKeep the saved gateway URL (%s) and APIM key? [Y/n] ' "$GATEWAY_CONFIG" "$GATEWAY_URL"
+  IFS= read -r KEEP_SAVED
+  case "$KEEP_SAVED" in
+    n|N|no|No|NO) GATEWAY_URL=; APIM_KEY= ;;
+  esac
+fi
 if [ -z "$GATEWAY_URL" ]; then
   printf 'TeamKit setup (1 of 2)\nEnter your HTTPS APIM gateway URL: '
   IFS= read -r GATEWAY_URL
@@ -66,7 +77,11 @@ case "$GATEWAY_URL" in
 esac
 if [ -z "$APIM_KEY" ]; then
   printf 'TeamKit setup (2 of 2)\nEnter your APIM key (input is hidden): '
-  trap 'stty echo 2>/dev/null || true' EXIT INT TERM
+  # macOS /bin/sh (bash 3.2) resumes an interrupted `read` after a trap that
+  # merely restores echo, so Ctrl-C here used to leave the prompt waiting with
+  # no way out; the INT/TERM trap must restore echo and exit.
+  trap 'stty echo 2>/dev/null || true' EXIT
+  trap 'stty echo 2>/dev/null || true; exit 130' INT TERM
   stty -echo 2>/dev/null || true
   IFS= read -r APIM_KEY
   stty echo 2>/dev/null || true
@@ -82,7 +97,14 @@ if [ -z "$REAL_CLAUDE" ]; then REAL_CLAUDE=$(command -v claude || true); fi
 if [ "$REAL_CLAUDE" != "$ROOT/bin/claude" ] && [ -n "$REAL_CLAUDE" ] && [ -x "$REAL_CLAUDE" ]; then
   printf '%s\n' "$REAL_CLAUDE" > "$ROOT/config/claude-bin"
 fi
+# Staging directories are private to one run and moved into place only after
+# every check passes. Any left behind belong to an interrupted earlier run
+# and are discarded; this run's own are discarded if it is interrupted.
+rm -rf "$ROOT/releases/teamkit"/.staging-* "$KB_ROOT"/.staging-*
 TEAMKIT_STAGE=
+KB_STAGE=
+trap 'rm -rf "${TEAMKIT_STAGE:-}" "${KB_STAGE:-}" 2>/dev/null' EXIT
+trap 'exit 130' INT TERM
 TEAMKIT_INSTALL="$TEAMKIT_TARGET"
 if [ ! -e "$TEAMKIT_TARGET" ]; then
   TEAMKIT_STAGE="$ROOT/releases/teamkit/.staging-$TEAMKIT_VERSION-$$"
@@ -110,6 +132,9 @@ fi
 if [ -n "${KB_STAGE:-}" ]; then
   mv "$KB_STAGE" "$KB_TARGET"
 fi
+TEAMKIT_STAGE=
+KB_STAGE=
+trap - EXIT INT TERM
 printf '%s\n' "$KB_VERSION" > "$KB_ROOT/current.txt.new"
 mv "$KB_ROOT/current.txt.new" "$KB_ROOT/current.txt"
 

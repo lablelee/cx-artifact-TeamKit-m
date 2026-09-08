@@ -190,7 +190,8 @@ main() {
   tmp=${TMPDIR:-/tmp}
   STAGE=$(mktemp -d "${tmp%/}/teamkit-bootstrap.XXXXXX")
   chmod 700 "$STAGE"
-  trap cleanup EXIT INT TERM
+  trap cleanup EXIT
+  trap 'exit 130' INT TERM
   HEADERS="$STAGE/headers"
   : > "$HEADERS"
   chmod 600 "$HEADERS"
@@ -232,6 +233,11 @@ main() {
   else
     TEAMKIT_INSTALL_CLIENT="$CLIENT" sh "$installer" "$core_bundle" "$kb_bundle"
   fi
+  # Under `curl ... | sh` this shell reads its commands from the pipe, and
+  # stdin was re-pointed at the terminal above. Returning from main would make
+  # sh wait for more commands from the terminal -- an install that has
+  # finished but never hands the prompt back. Leave explicitly instead.
+  exit 0
 }
 
 main "$@"
