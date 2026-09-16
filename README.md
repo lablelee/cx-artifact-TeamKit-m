@@ -56,7 +56,14 @@ bundle. macOS uses a readable shell bootstrap because unsigned downloaded apps
 are blocked by Gatekeeper; every downloaded component is hash-checked before it
 runs.
 
-To install only Copilot, add `-s -- --client copilot` after `sh`.
+To install only one client, add one of these after `sh`:
+
+```sh
+-s -- --client claude
+-s -- --client codex
+-s -- --client copilot
+-s -- --client zed
+```
 
 ## Install on Windows
 
@@ -69,7 +76,14 @@ If Windows SmartScreen displays a warning for this new unsigned executable,
 choose **More info**, then **Run anyway**. The installer verifies the catalog
 checksums before extracting its components.
 
-To install only Copilot, run `TeamKit-Setup.exe --client copilot`.
+To install only one client, run one of these commands instead:
+
+```text
+TeamKit-Setup.exe --client claude
+TeamKit-Setup.exe --client codex
+TeamKit-Setup.exe --client copilot
+TeamKit-Setup.exe --client zed
+```
 
 ## Use GitHub Copilot
 
