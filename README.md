@@ -16,7 +16,7 @@ Pick your computer below.
    - **Your TeamKit key** — paste it and press `Enter`. Nothing will appear
      on screen as you type or paste — that's normal, it's hiding it on
      purpose, like a password field.
-4. Wait for `TeamKit 0.1.75 is ready` (or similar). That's it — installed.
+4. Wait for `TeamKit 0.1.76 is ready` (or similar). That's it — installed.
 5. Open a **new** Terminal window and type `tk` to start using it.
 
 You will *not* see a download link or a program icon to double-click for
@@ -47,6 +47,20 @@ run `TeamKit-Setup.exe --client codex` on Windows (swap `codex` for `claude`,
 Do not download files under `stable/` manually. The installer selects the
 correct platform components and verifies their SHA-256 hashes using
 `stable/latest.json`.
+
+## Copilot gateway fallback
+
+The normal Copilot launcher uses the user's GitHub Copilot subscription. If
+that subscription has reached its limit, the included BYOK gateway fallback
+uses the TeamKit APIM gateway configured during installation. On Windows open
+`Copilot TeamKit (Gateway).cmd`; it defaults to the Luna family. Set
+`TEAMKIT_COPILOT_MODEL=claude` before launching to use Claude instead. On
+macOS run `tk gateway copilot-launch --model luna --` (or replace `luna` with
+`claude`).
+
+Direct, client-specific downloads are also available in `pilots/` for Windows,
+macOS Intel, and macOS Apple Silicon. Each includes the selected Copilot setup
+and its matching verified Go KB bundle.
 
 ### Why the Mac install works this way
 

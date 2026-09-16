@@ -1,13 +1,13 @@
 {
   "schema_version": "teamkit.release-catalog/v1",
   "channel": "stable",
-  "teamkit_version": "0.1.75",
+  "teamkit_version": "0.1.76",
   "platforms": {
     "windows-amd64": {
       "core": {
-        "path": "core/teamkit-0.1.75-windows-amd64.zip",
-        "size": 30898661,
-        "sha256": "f9a0061ca25714967ee6784229f00d5d3fba53b9fb1a0cec8f053d39a751b32b"
+        "path": "core/teamkit-0.1.76-windows-amd64.zip",
+        "size": 30908494,
+        "sha256": "1cc39278407dfac10d7a5b79a8f54888c99e25e2458a5f41e97d11985bf85caa"
       },
       "kb": {
         "path": "packs/ci360-kb-go-0.1.5-citations-windows-amd64.zip",
@@ -17,9 +17,9 @@
     },
     "darwin-amd64": {
       "core": {
-        "path": "core/teamkit-0.1.75-darwin-amd64.zip",
-        "size": 27399659,
-        "sha256": "e524ca017807c241ec4b94cd730d9feca0df659659686d997f1770fd54e79b0f"
+        "path": "core/teamkit-0.1.76-darwin-amd64.zip",
+        "size": 27409271,
+        "sha256": "ddbe858a0eff18aead6d95a9bdb5fa64ea9e4b82df8d1db4e23d84e5817d920c"
       },
       "kb": {
         "path": "packs/ci360-kb-go-0.1.5-citations-darwin-amd64.zip",
@@ -34,9 +34,9 @@
     },
     "darwin-arm64": {
       "core": {
-        "path": "core/teamkit-0.1.75-darwin-arm64.zip",
-        "size": 25664427,
-        "sha256": "ae56b0dbc13a0c2d2802cc964fd2ca58e3da0ebb4dc25a35f00b90293601987e"
+        "path": "core/teamkit-0.1.76-darwin-arm64.zip",
+        "size": 25672354,
+        "sha256": "a99f05eecbbaef8f982ebdef4923720463a0b8d4fb39168cb8c8b1758e5748d9"
       },
       "kb": {
         "path": "packs/ci360-kb-go-0.1.5-citations-darwin-arm64.zip",
