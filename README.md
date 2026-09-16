@@ -22,6 +22,22 @@ You need:
 
 The installer does not install Copilot, Claude, Codex, or Zed for you.
 
+## Choose a client
+
+The normal Windows and macOS installers prepare all four supported clients:
+
+| Client | What TeamKit-m provides |
+| --- | --- |
+| Claude | A managed TeamKit workspace launcher. |
+| Codex | A managed TeamKit workspace launcher. |
+| GitHub Copilot | A managed workspace launcher and the optional APIM BYOK fallback. |
+| Zed | A workspace launcher with TeamKit policy files. |
+
+After installing all clients, choose the default with `tk --default claude`,
+`tk --default codex`, `tk --default copilot`, or `tk --default zed`. The
+platform-specific install sections below also show how to install one selected
+client only.
+
 ## Install on macOS
 
 1. Open **Terminal**.
@@ -77,7 +93,8 @@ credential from shell and MCP child-process environments.
 ## Direct Copilot installer ZIPs
 
 Use these if you want a self-contained, Copilot-preselected installer rather
-than the normal bootstrap:
+than the normal bootstrap. They are optional; the normal installers above are
+the right choice when you use more than one client.
 
 - [Windows](pilots/TeamKit-Windows-Copilot-Gateway-0.1.76.zip?raw=1)
 - [macOS Apple silicon](pilots/TeamKit-macOS-AppleSilicon-Copilot-Gateway-0.1.76.zip?raw=1)
