@@ -22,6 +22,12 @@ You need:
 
 The installer does not install Copilot, Claude, Codex, or Zed for you.
 
+On Windows, TeamKit supports **Visual Studio Code with GitHub Copilot**. It
+does not require Visual Studio, a compiler, Go, Python, PowerShell, or
+administrator access. The GitHub Copilot CLI used by the `tk` terminal
+launcher and the GitHub Copilot extension used inside VS Code are separate
+GitHub installations; install the one you intend to use, or both.
+
 ## Choose a client
 
 The normal Windows and macOS installers prepare all four supported clients:
@@ -67,10 +73,30 @@ To install only one client, add one of these after `sh`:
 
 ## Install on Windows
 
-1. Download [TeamKit Setup for Windows](bootstrap/TeamKit-Setup-Windows.zip?raw=1).
-2. Extract the ZIP, then double-click `TeamKit-Setup.exe`.
-3. Enter the TeamKit gateway URL and APIM key when prompted.
-4. Open a new Command Prompt and run `tk`.
+These steps work on Windows 11 without administrator access.
+
+1. Install and sign in to GitHub Copilot. For terminal use, confirm that
+   `copilot --version` works in Command Prompt. For editor use, install the
+   GitHub Copilot extension in Visual Studio Code and sign in there.
+2. Download [TeamKit Setup for Windows](bootstrap/TeamKit-Setup-Windows.zip?raw=1).
+3. Right-click the ZIP, choose **Extract All**, then double-click
+   `TeamKit-Setup.exe` in the extracted folder.
+4. At the gateway prompt, enter `https://cx-ai-apim.azure-api.net/ai`.
+   At the next prompt, enter the APIM key supplied to you. The key is hidden.
+5. Wait for the `TeamKit 0.1.76 is ready` message, then open a new Command
+   Prompt. Run `tk --default copilot`, then run `tk` to start the Copilot CLI
+   in the prepared TeamKit workspace.
+
+To use the same prepared workspace in VS Code, run this in a new Command
+Prompt after installation:
+
+```text
+code %LOCALAPPDATA%\TeamKit\workspace
+```
+
+Trust the workspace when VS Code asks. TeamKit has already placed its Copilot
+instructions and local MCP configuration in that workspace. Review and enable
+the offered MCP servers in VS Code before using them.
 
 If Windows SmartScreen displays a warning for this new unsigned executable,
 choose **More info**, then **Run anyway**. The installer verifies the catalog
